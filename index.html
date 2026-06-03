@@ -5,33 +5,172 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal de Boletos - Lipetral</title>
     
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="./assets/icon.ico">
     
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Alexandria', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-
     <style>
-        .glass-panel {
+        :root {
+            --bg-color: #0f172a;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --color-agro: #3A7D32;
+            --color-maquinas: #CD1B2E;
+            --color-irrigacao: #A02743;
+            --color-metal: #2097A0;
+            --color-transportes: #F08219;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Alexandria', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 28rem;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .logo-box {
+            background-color: #ffffff;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo-box img {
+            height: 3rem;
+            object-fit: contain;
+        }
+
+        .title {
+            font-size: 1.875rem;
+            line-height: 2.25rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .link-list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .card {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            border-radius: 1rem;
+            border: 1px solid;
+            text-decoration: none;
+            transition: all 0.3s ease;
         }
-        
+
+        .card-logo {
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .card-logo img {
+            height: 2rem;
+            object-fit: contain;
+        }
+
+        .card-text {
+            font-size: 1.125rem;
+            font-weight: 400;
+        }
+
+        .icon-arrow {
+            margin-left: auto;
+            width: 1.5rem;
+            height: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .icon-arrow {
+            transform: translateX(0.25rem);
+        }
+
+        /* Cores de Marcas e Efeitos Hover */
+        .card.agro { border-color: var(--color-agro); color: var(--color-agro); }
+        .card.agro:hover {
+            background-color: var(--color-agro);
+            color: #ffffff;
+            box-shadow: 0 0 20px rgba(58, 125, 50, 0.4);
+        }
+
+        .card.maquinas { border-color: var(--color-maquinas); color: var(--color-maquinas); }
+        .card.maquinas:hover {
+            background-color: var(--color-maquinas);
+            color: #ffffff;
+            box-shadow: 0 0 20px rgba(205, 27, 46, 0.4);
+        }
+
+        .card.irrigacao { border-color: var(--color-irrigacao); color: var(--color-irrigacao); }
+        .card.irrigacao:hover {
+            background-color: var(--color-irrigacao);
+            color: #ffffff;
+            box-shadow: 0 0 20px rgba(25, 94, 55, 0.4);
+        }
+
+        .card.metal { border-color: var(--color-metal); color: var(--color-metal); }
+        .card.metal:hover {
+            background-color: var(--color-metal);
+            color: #ffffff;
+            box-shadow: 0 0 20px rgba(32, 151, 160, 0.4);
+        }
+
+        .card.transportes { border-color: var(--color-transportes); color: var(--color-transportes); }
+        .card.transportes:hover {
+            background-color: var(--color-transportes);
+            color: #ffffff;
+            box-shadow: 0 0 20px rgba(240, 130, 25, 0.4);
+        }
+
         .btn-desativado {
             opacity: 0.5;
             pointer-events: none;
@@ -42,58 +181,58 @@
         }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col items-center justify-center p-6 antialiased">
+<body>
 
-    <div class="max-w-md w-full flex flex-col items-center gap-8">
+    <div class="container">
         
-        <div class="flex flex-col items-center text-center">
-            <div class="bg-white p-4 rounded-xl mb-6 shadow-lg">
-                <img src="./assets/Logo_GrupoLipetral.png" alt="Grupo Lipetral" class="h-12 object-contain">
+        <div class="header">
+            <div class="logo-box">
+                <img src="./assets/Logo_GrupoLipetral.png" alt="Grupo Lipetral">
             </div>
-            <h1 class="text-3xl font-bold tracking-tight text-white mb-2">Portal de Boletos</h1>
-            <p class="text-slate-400 font-semibold">Selecione a empresa abaixo para acessar a plataforma correspondente.</p>
+            <h1 class="title">Portal de Boletos</h1>
+            <p class="subtitle">Selecione a empresa abaixo para acessar a plataforma correspondente.</p>
         </div>
 
-        <div class="w-full flex flex-col gap-4">
+        <div class="link-list">
             
-            <a href="http://boletos.lipetral.com.br" class="group glass-panel w-full flex items-center p-3 rounded-2xl border border-[#3A7D32] text-[#3A7D32] transition-all duration-300 hover:bg-[#3A7D32] hover:text-white hover:shadow-[0_0_20px_rgba(58,125,50,0.4)]">
-                <div class="bg-white rounded-lg p-3 mr-4 flex-shrink-0">
-                    <img src="./assets/Logo_LipetralAgro.png" alt="Lipetral Agro" class="h-8 object-contain">
+            <a href="http://boletos.lipetral.com.br" class="card agro">
+                <div class="card-logo">
+                    <img src="./assets/Logo_LipetralAgro.png" alt="Lipetral Agro">
                 </div>
-                <span class="text-lg font-normal">Lipetral Agro | John Deere</span>
-                <svg class="ml-auto w-6 h-6 transform transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                <span class="card-text">Lipetral Agro | John Deere</span>
+                <svg class="icon-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
             </a>
 
-            <a href="http://boletos.lipetralmaquinas.com.br" class="group glass-panel w-full flex items-center p-3 rounded-2xl border border-[#CD1B2E] text-[#CD1B2E] transition-all duration-300 hover:bg-[#CD1B2E] hover:text-white hover:shadow-[0_0_20px_rgba(205,27,46,0.4)]">
-                <div class="bg-white rounded-lg p-3 mr-4 flex-shrink-0">
-                    <img src="./assets/Logo_LipetralMáquinas.png" alt="Lipetral Máquinas" class="h-8 object-contain">
+            <a href="http://boletos.lipetralmaquinas.com.br" class="card maquinas">
+                <div class="card-logo">
+                    <img src="./assets/Logo_LipetralMáquinas.png" alt="Lipetral Máquinas">
                 </div>
-                <span class="text-lg font-normal">Lipetral Máquinas | Toyota Empilhadeiras</span>
-                <svg class="ml-auto w-6 h-6 transform transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                <span class="card-text">Lipetral Máquinas | Toyota Empilhadeiras</span>
+                <svg class="icon-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
             </a>
 
-            <a href="http://boletos.lipetralirrigacao.com.br" class="group glass-panel w-full flex items-center p-3 rounded-2xl border border-[#A02743] text-[#A02743] transition-all duration-300 hover:bg-[#A02743] hover:text-white hover:shadow-[0_0_20px_rgba(25,94,55,0.4)]">
-                <div class="bg-white rounded-lg p-3 mr-4 flex-shrink-0">
-                    <img src="./assets/Logo_LipetralIrrigação.png" alt="Lipetral Máquinas" class="h-8 object-contain">
+            <a href="http://boletos.lipetralirrigacao.com.br" class="card irrigacao">
+                <div class="card-logo">
+                    <img src="./assets/Logo_LipetralIrrigação.png" alt="Lipetral Irrigação">
                 </div>
-                <span class="text-lg font-normal">Lipetral Irrigação | Lindsay</span>
-                <svg class="ml-auto w-6 h-6 transform transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                <span class="card-text">Lipetral Irrigação | Lindsay</span>
+                <svg class="icon-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
             </a>
 
-            <a href="http://boletos.lipetralmetalmecanica.com.br" class="group glass-panel w-full flex items-center p-3 rounded-2xl border border-[#2097A0] text-[#2097A0] transition-all duration-300 hover:bg-[#2097A0] hover:text-white hover:shadow-[0_0_20px_rgba(32,151,160,0.4)]  btn-desativado">
-                <div class="bg-white rounded-lg p-3 mr-4 flex-shrink-0">
-                    <img src="./assets/Logo_LipetralMetalmecânica.png" alt="Lipetral Máquinas" class="h-8 object-contain">
+            <a href="http://boletos.lipetralmetalmecanica.com.br" class="card metal btn-desativado">
+                <div class="card-logo">
+                    <img src="./assets/Logo_LipetralMetalmecânica.png" alt="Lipetral Metalmecânica">
                 </div>
-                <span class="text-lg font-normal">Lipetral Metalmecânica</span>
-                <svg class="ml-auto w-6 h-6 transform transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                <span class="card-text">Lipetral Metalmecânica</span>
+                <svg class="icon-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
             </a>
 
-            <a href="http://boletos.lipetraltransportes.com.br" class="group glass-panel w-full flex items-center p-3 rounded-2xl border border-[#F08219] text-[#F08219] transition-all duration-300 hover:bg-[#F08219] hover:text-white hover:shadow-[0_0_20px_rgba(240,130,25,0.4)]">
-                <div class="bg-white rounded-lg p-3 mr-4 flex-shrink-0">
-                    <img src="./assets/Logo_LipetralTransportes.png" alt="Lipetral Transportes" class="h-8 object-contain">
+            <a href="http://boletos.lipetraltransportes.com.br" class="card transportes">
+                <div class="card-logo">
+                    <img src="./assets/Logo_LipetralTransportes.png" alt="Lipetral Transportes">
                 </div>
-                <span class="text-lg font-normal">Lipetral Transportes</span>
-                <svg class="ml-auto w-6 h-6 transform transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                <span class="card-text">Lipetral Transportes</span>
+                <svg class="icon-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
             </a>
 
         </div>
